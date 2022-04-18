@@ -1,0 +1,32 @@
+.results {
+  width: 200px;
+  display: flex;
+  flex-direction: column-reverse;
+
+  &-item {
+    text-align: left;
+    margin-bottom: 6px;
+    color: #e1a02e;
+    padding-left: 15px;
+    font-size: 18px;
+
+    &.non-burnable {
+      color: #fff;
+    }
+
+    &.active-round {
+      background: url('../../../../../public/images/step_active.png') no-repeat;
+      color: #000;
+
+      .round {
+        color: #fff;
+      }
+    }
+
+    .round {
+      display: inline-block;
+      width: 40px;
+      text-align: center;
+    }
+  }
+}

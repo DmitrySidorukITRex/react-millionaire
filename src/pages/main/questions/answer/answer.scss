@@ -1,0 +1,33 @@
+.answer {
+  background-image: url('../../../../../public/images/answer.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% 310px;
+  width: 340px;
+  font-size: 18px;
+  line-height: 22px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+
+  &:hover {
+    cursor: pointer;
+    background-position: 0 -52px;
+  }
+
+  &.active,
+  &.wrong-answer {
+    pointer-events: none;
+    background-position: 0 -52px;
+  }
+
+  &.right-answer {
+    pointer-events: none;
+    background-position: 0 -134px;
+  }
+
+  &.hidden {
+    visibility: hidden;
+  }
+}
