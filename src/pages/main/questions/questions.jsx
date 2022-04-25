@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Answer from './answer/answer';
-import './questions.scss';
+import classes from './questions.module.scss';
 
-const Questions = (props) => {
+const Questions = ({ round, answerClicked }) => {
+  const [currentAnswer, setCurrentAnswer] = useState();
+  const [rightAnswer, setRightAnswer] = useState();
+
+  const onAnswerClicked = (text) => {
+    setCurrentAnswer(text);
+
+    setTimeout(() => {
+      setRightAnswer(round.rightAnswer);
+      const isAnswerRight = round.rightAnswer === text;
+      answerClicked(isAnswerRight);
+    }, 2000);
+  };
+
   return (
-    <div className="component">
-      <div className="question">
-        <span>{props.round.question}</span>
+    <div className={classes.component}>
+      <div className={classes.question}>
+        <span>{round.question}</span>
       </div>
-      <div className="answers">
-        {props.round.answers.map((answer, index) => {
+      <div className={classes.answers}>
+        {round.answers.map((answer, index) => {
           return (
             <Answer
               key={index}
               index={index}
               text={answer}
-              currentAnswer={props.currentAnswer}
-              rightAnswer={props.rightAnswer}
-              onAnswerClicked={props.onAnswerClicked}
+              currentAnswer={currentAnswer}
+              rightAnswer={rightAnswer}
+              onAnswerClicked={onAnswerClicked}
             />
           );
         })}
-        <div className="roundNumber">{props.round.roundNumber}</div>
+        <div className={classes.roundNumber}>{round.roundNumber}</div>
       </div>
     </div>
   );

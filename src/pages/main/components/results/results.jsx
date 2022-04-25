@@ -3,7 +3,7 @@ import classes from './results.module.scss';
 import { ResultsList } from './results.constants';
 import classNames from 'classnames';
 
-const Results = (props) => {
+const Results = ({ currentRoundIndex }) => {
   function isNonBurnable(round) {
     switch (round) {
       case 5:
@@ -19,7 +19,7 @@ const Results = (props) => {
     <div className={classes.results}>
       {ResultsList.map((result, index) => {
         let resultItemClasses = classNames(classes['results-item'], {
-          [classes['active-round']]: props.currentRoundIndex === index,
+          [classes['active-round']]: currentRoundIndex === index,
           [classes['non-burnable']]: isNonBurnable(result.round),
         });
 

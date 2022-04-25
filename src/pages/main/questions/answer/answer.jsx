@@ -8,9 +8,9 @@ const ButtonState = {
   Hidden: 'hidden',
 };
 
-const Answer = (props) => {
+const Answer = ({ text, currentAnswer, rightAnswer, currentHint, index, onAnswerClicked }) => {
   function answerClicked() {
-    props.onAnswerClicked(props.text);
+    onAnswerClicked(text);
   }
 
   function getLetter(index) {
@@ -29,12 +29,12 @@ const Answer = (props) => {
     }
   }
 
-  function getButtonState(currentAnswer, rightAnswer, currentHint) {
-    if (!props.text) {
+  function getButtonState(currentAnswer, rightAnswer) {
+    if (!text) {
       return ButtonState.Hidden;
-    } else if (currentAnswer && rightAnswer && rightAnswer === props.text) {
+    } else if (currentAnswer && rightAnswer && rightAnswer === text) {
       return ButtonState.RightAnswer;
-    } else if (currentAnswer && currentAnswer === props.text) {
+    } else if (currentAnswer && currentAnswer === text) {
       return ButtonState.Active;
     }
 
@@ -42,11 +42,8 @@ const Answer = (props) => {
   }
 
   return (
-    <div
-      className={`answer ${getButtonState(props.currentAnswer, props.rightAnswer, props.currentHint)}`}
-      onClick={answerClicked}
-    >
-      {getLetter(props.index)} : {props.text}
+    <div className={`answer ${getButtonState(currentAnswer, rightAnswer)}`} onClick={answerClicked}>
+      {getLetter(index)} : {text}
     </div>
   );
 };

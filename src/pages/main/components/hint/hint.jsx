@@ -3,17 +3,17 @@ import classes from './hint.module.scss';
 import classNames from 'classnames';
 import sound from '../../sounds/select-hint.mp3';
 
-const HintButton = (props) => {
+const HintButton = ({ name, hintsActivated, hintClicked }) => {
   const onHintClicked = () => {
     const audio = new Audio(sound);
     audio.play();
-    props.hintClicked(props.name);
+    hintClicked(name);
   };
 
   return (
     <div
-      className={classNames(classes.hint, classes[props.name], {
-        [classes.disabled]: props.hintsActivated.includes(props.name),
+      className={classNames(classes.hint, classes[name], {
+        [classes.disabled]: hintsActivated.includes(name),
       })}
       onClick={onHintClicked}
     ></div>
