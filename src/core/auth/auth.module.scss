@@ -1,0 +1,32 @@
+.component {
+  display: flex;
+  height: 100vh;
+
+  .left {
+    flex: 1;
+    display: flex;
+    background-color: lightgoldenrodyellow;
+
+    img {
+      width: 505px;
+      height: 435px;
+      margin: auto;
+    }
+  }
+
+  .right {
+    flex: 1;
+    text-align: center;
+
+    h2 {
+      margin-top: 250px;
+      margin-bottom: 50px;
+      color: gray;
+    }
+
+    .new-account {
+      color: gray;
+      margin-top: 50px;
+    }
+  }
+}

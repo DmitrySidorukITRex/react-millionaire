@@ -1,10 +1,12 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import React, { useContext, useState } from 'react';
+import { getCurrentUser } from '../../core/auth/auth.service';
 import HintButton from './components/hint/hint';
 import Results from './components/results/results';
 import { Descriptions, Hints } from './main.constants';
-import { MainContext } from './main.provider';
+import { MainContext, MainProvider } from './main.provider';
 import './main.scss';
+import { updateUserRating } from './main.service';
 import CallHintModal from './modals/call-hint-modal/call-hint-modal';
 import EndGameModal from './modals/end-game-modal/end-game-modal';
 import HallHintModal from './modals/hall-hint-modal/hall-hint-modal';
@@ -94,11 +96,17 @@ const Main = () => {
       if (currentRoundIndex === rounds.length - 1) {
         setIsWon(true);
         setModals({ ...modals, endGame: true });
+        updateRating(true);
       } else {
         setCurrentRoundIndex((curr) => curr + 1);
         fullGameSound.play();
       }
     }, 2000);
+  };
+
+  const updateRating = (isWon) => {
+    const user = getCurrentUser().user;
+    updateUserRating(user._id, 1, getScores(isWon)).then();
   };
 
   const onWrongAnswer = () => {
@@ -107,6 +115,7 @@ const Main = () => {
       setIsWon(false);
       setModals({ ...modals, endGame: true });
     }, 2000);
+    updateRating(false);
   };
 
   const descriptions = Descriptions.map((x, i) => {
@@ -164,4 +173,12 @@ const Main = () => {
   );
 };
 
-export default Main;
+const MainWithContext = () => {
+  return (
+    <MainProvider>
+      <Main />
+    </MainProvider>
+  );
+};
+
+export default MainWithContext;

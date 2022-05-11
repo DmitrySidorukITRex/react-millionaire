@@ -6,8 +6,11 @@ const Header = () => {
   return (
     <div className="header">
       <div className="nav-list">
-        <NavLink to="/" exact="true" className="nav-list-item">
+        <NavLink to="/game" exact="true" className="nav-list-item">
           Главная
+        </NavLink>
+        <NavLink to="/rating" exact="true" className="nav-list-item">
+          Рейтинг
         </NavLink>
         <NavLink to="/rules" className="nav-list-item">
           Правила
