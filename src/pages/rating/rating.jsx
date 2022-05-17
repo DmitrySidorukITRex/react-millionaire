@@ -71,9 +71,8 @@ const Rating = (props) => {
             <TableBody>{dataRows}</TableBody>
           </Table>
         </TableContainer>
-      ) : (
-        <CircularProgress color="inherit" className={classes.loader} />
-      )}
+      ) : // <CircularProgress color="inherit" className={classes.loader} />
+      null}
     </>
   );
 };

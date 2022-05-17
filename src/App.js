@@ -5,11 +5,19 @@ import Auth from './core/auth/auth';
 import MainLayout from './core/layout/main-layout';
 import PrivateRoute from './core/routes/private-route';
 import About from './pages/about/about';
-import Main from './pages/main/main';
-import Rating from './pages/rating/rating';
 import Rules from './pages/rules/rules';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import importedComponent from 'react-imported-component';
+import Loading from './core/loading/loading';
+
+const MainScreen = importedComponent(() => import(/*webpackChunkName: "Main"*/ './pages/main/main'), {
+  LoadingComponent: Loading,
+});
+
+const RatingScreen = importedComponent(() => import(/*webpackChunkName: "Rating"*/ './pages/rating/rating'), {
+  LoadingComponent: Loading,
+});
 
 function App() {
   return (
@@ -22,7 +30,7 @@ function App() {
             exact="true"
             element={
               <PrivateRoute>
-                <Main />
+                <MainScreen />
               </PrivateRoute>
             }
           />
@@ -47,7 +55,7 @@ function App() {
             path="/rating"
             element={
               <PrivateRoute>
-                <Rating />
+                <RatingScreen />
               </PrivateRoute>
             }
           />
