@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser } from '../auth/auth.service';
+import { useLoggedIn } from '../../store/slices/auth/selectors';
 
 const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
-  const loggedIn = !!getCurrentUser();
+  const loggedIn = useLoggedIn();
 
   useEffect(() => {
     if (!loggedIn) {

@@ -1,8 +1,13 @@
 import React from 'react';
 import './header.scss';
 import { NavLink } from 'react-router-dom';
+import { useAppDispatch } from '../../store/store';
+import { logout } from '../../store/slices/auth/slice';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+
+  const onLogout = () => dispatch(logout());
   return (
     <div className="header">
       <div className="nav-list">
@@ -18,6 +23,9 @@ const Header = () => {
         <NavLink to="/about" className="nav-list-item">
           История
         </NavLink>
+      </div>
+      <div className="logout" onClick={onLogout}>
+        Logout
       </div>
     </div>
   );

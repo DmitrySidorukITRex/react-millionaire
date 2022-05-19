@@ -3,7 +3,10 @@ import TextField from '@mui/material/TextField';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../auth.service.js';
+import { useAuthError } from '../../../store/slices/auth/selectors.js';
+import { login } from '../../../store/slices/auth/thunks.js';
+import { useAppDispatch } from '../../../store/store.js';
+// import { login } from '../auth.service.js';
 import classes from './login.module.scss';
 
 const Login = () => {
@@ -13,10 +16,12 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const authError = useAuthError();
 
   const onSubmit = ({ email, password }) => {
-    login(email, password).then((res) => {
-      if (res) navigate('/game');
+    dispatch(login({ email, password })).then((res) => {
+      if (res.payload.token) navigate('/game');
     });
   };
 
@@ -44,6 +49,8 @@ const Login = () => {
         />
         {errors.password?.type === 'required' && <span className={classes.error}>Password is required</span>}
       </div>
+
+      <div className={classes.authError}>{authError?.message}</div>
 
       <Button className={classes.button} variant="contained" color="success" type="submit">
         Sign In

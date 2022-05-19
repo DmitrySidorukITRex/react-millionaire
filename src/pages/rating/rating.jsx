@@ -22,7 +22,6 @@ const Rating = (props) => {
   const columns = ['Name', 'Email', 'Number of games', 'Money earned', ''];
 
   useEffect(() => {
-    console.log(props.match);
     dispatch(getUsersRating());
   }, [dispatch]);
 
